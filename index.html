@@ -13,6 +13,8 @@
             --text-color: #e0e0e0;
             --text-muted: #9e9e9e;
             --border-color: #2c2c35;
+            --web-btn-color: #2196F3;
+            --web-btn-hover: #1976D2;
         }
 
         body {
@@ -30,7 +32,7 @@
 
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         h1 {
@@ -44,47 +46,68 @@
             margin-top: 0;
         }
 
-        .search-box {
-            width: 100%;
-            padding: 14px 20px;
-            font-size: 1.1rem;
+        .search-container {
             background-color: var(--card-bg);
             border: 2px solid var(--border-color);
             border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .search-box-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box {
+            flex: 1;
+            padding: 12px 18px;
+            font-size: 1.05rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             color: var(--text-color);
             outline: none;
             transition: border-color 0.2s;
-            box-sizing: border-box;
-            margin-bottom: 25px;
         }
 
         .search-box:focus {
             border-color: var(--accent-color);
         }
 
-        .categories {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .cat-btn {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 8px 16px;
-            border-radius: 20px;
+        .web-search-btn {
+            background-color: var(--web-btn-color);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            font-size: 1rem;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background-color 0.2s;
+            white-space: nowrap;
         }
 
-        .cat-btn:hover, .cat-btn.active {
-            background-color: var(--accent-color);
+        .web-search-btn:hover {
+            background-color: var(--web-btn-hover);
+        }
+
+        .local-search-input {
+            width: 100%;
+            padding: 12px 18px;
+            font-size: 1rem;
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-color);
+            outline: none;
+            box-sizing: border-box;
+            margin-bottom: 25px;
+            transition: border-color 0.2s;
+        }
+
+        .local-search-input:focus {
             border-color: var(--accent-color);
-            font-weight: 600;
         }
 
         .grid {
@@ -140,6 +163,14 @@
             line-height: 1.4;
             margin: 0;
         }
+
+        code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #ffeb3b;
+        }
     </style>
 </head>
 <body>
@@ -150,110 +181,145 @@
         <p class="subtitle">Всё самое важное под рукой!</p>
     </header>
 
-    <input type="text" id="searchInput" class="search-box" placeholder="Поиск предмета, рецепта или команды..." onkeyup="filterCards()">
-
-    <div class="categories">
-        <button class="cat-btn active" onclick="filterCategory('all', this)">Все</button>
-        <button class="cat-btn" onclick="filterCategory('craft', this)">Крафт</button>
-        <button class="cat-btn" onclick="filterCategory('redstone', this)">Редстоун</button>
-        <button class="cat-btn" onclick="filterCategory('potions', this)">Зельеварение</button>
-        <button class="cat-btn" onclick="filterCategory('commands', this)">Команды</button>
+    <!-- Поиск в сети -->
+    <div class="search-container">
+        <label for="webSearchInput" style="display: block; margin-bottom: 8px; font-size: 0.9rem; color: var(--text-muted);">🌐 Найти в интернете (Minecraft Wiki / Google):</label>
+        <div class="search-box-wrapper">
+            <input type="text" id="webSearchInput" class="search-box" placeholder="Например: как сделать маяк, редстоун лифт..." onkeypress="handleWebSearchKey(event)">
+            <button class="web-search-btn" onclick="searchWeb()">Искать в сети</button>
+        </div>
     </div>
 
+    <!-- Поиск по готовым карточкам -->
+    <input type="text" id="searchInput" class="local-search-input" placeholder="🔍 Введите название предмета, крафта или команды..." onkeyup="filterCards()">
+
     <div class="grid" id="cardsGrid">
-        <!-- Карточка 1 -->
-        <div class="card" data-category="craft" data-search="верстак доски крафт">
+        <!-- КРАФТ -->
+        <div class="card" data-search="верстак доски крафт">
             <div>
-                <div class="card-header">
-                    <h3 class="card-title">Верстак</h3>
-                    <span class="card-badge">Крафт</span>
-                </div>
+                <div class="card-header"><h3 class="card-title">Верстак</h3><span class="card-badge">Крафт</span></div>
                 <p class="card-desc">4 блока досок (любой древесины) в квадрате 2х2.</p>
             </div>
         </div>
 
-        <!-- Карточка 2 -->
-        <div class="card" data-category="craft" data-search="сундук доски крафт">
+        <div class="card" data-search="сундук доски крафт">
             <div>
-                <div class="card-header">
-                    <h3 class="card-title">Сундук</h3>
-                    <span class="card-badge">Крафт</span>
-                </div>
+                <div class="card-header"><h3 class="card-title">Сундук</h3><span class="card-badge">Крафт</span></div>
                 <p class="card-desc">8 досок по периметру верстака (оставьте центр пустым).</p>
             </div>
         </div>
 
-        <!-- Карточка 3 -->
-        <div class="card" data-category="redstone" data-search="повторитель задержка редстоун">
+        <div class="card" data-search="печка булыжник камень печь">
             <div>
-                <div class="card-header">
-                    <h3 class="card-title">Повторитель</h3>
-                    <span class="card-badge">Редстоун</span>
-                </div>
-                <p class="card-desc">3 камня (булыжника) в ряд, сверху 2 редстоун-факела и посередине красный камень.</p>
-            </div>
-        </div>
-
-        <!-- Карточка 4 -->
-        <div class="card" data-category="potions" data-search="зелье варка колба зельеварение">
-            <div>
-                <div class="card-header">
-                    <h3 class="card-title">Мутная колба (База)</h3>
-                    <span class="card-badge">Зельеварение</span>
-                </div>
-                <p class="card-desc">Бутылочка с водой + Сгусток магмы. Основа для многих зелий.</p>
-            </div>
-        </div>
-
-        <!-- Карточка 5 -->
-        <div class="card" data-category="commands" data-search="команды день время погода /time">
-            <div>
-                <div class="card-header">
-                    <h3 class="card-title">Установить день</h3>
-                    <span class="card-badge">Команды</span>
-                </div>
-                <p class="card-desc"><code>/time set day</code> — включает яркое утреннее солнце.</p>
-            </div>
-        </div>
-
-        <!-- Карточка 6 -->
-        <div class="card" data-category="commands" data-search="команды погода ясно дождь /weather">
-            <div>
-                <div class="card-header">
-                    <h3 class="card-title">Убрать дождь</h3>
-                    <span class="card-badge">Команды</span>
-                </div>
-                <p class="card-desc"><code>/weather clear</code> — делает погоду идеально солнечной.</p>
-            </div>
-        </div>
-
-        <!-- Карточка 7 -->
-        <div class="card" data-category="craft" data-search="ворока печка уголь железо руда">
-            <div>
-                <div class="card-header">
-                    <h3 class="card-title">Печка</h3>
-                    <span class="card-badge">Крафт</span>
-                </div>
+                <div class="card-header"><h3 class="card-title">Печка</h3><span class="card-badge">Крафт</span></div>
                 <p class="card-desc">8 блоков булыжника по кругу (без центрального блока).</p>
             </div>
         </div>
 
-        <!-- Карточка 8 -->
-        <div class="card" data-category="redstone" data-search="липкий поршень слизь редстоун">
+        <div class="card" data-search="наковальня железо">
             <div>
-                <div class="card-header">
-                    <h3 class="card-title">Липкий поршень</h3>
-                    <span class="card-badge">Редстоун</span>
-                </div>
-                <p class="card-desc">Обычный поршень + Шлак/Слизь (slimeball) сверху.</p>
+                <div class="card-header"><h3 class="card-title">Наковальня</h3><span class="card-badge">Крафт</span></div>
+                <p class="card-desc">3 железных блока сверху + 4 железных слитка (по центру и снизу).</p>
+            </div>
+        </div>
+
+        <div class="card" data-search="портал в нижний мир ад обсидиан зажигалка">
+            <div>
+                <div class="card-header"><h3 class="card-title">Портал в Ад</h3><span class="card-badge">Крафт</span></div>
+                <p class="card-desc">Рамка из обсидиана (минимум 4х5 блоков). Поджечь изнутри огнивом.</p>
+            </div>
+        </div>
+
+        <div class="card" data-search="воронка сундук железо">
+            <div>
+                <div class="card-header"><h3 class="card-title">Воронка</h3><span class="card-badge">Крафт</span></div>
+                <p class="card-desc">5 железных слитков (в форме буквы V) + 1 сундук посередине.</p>
+            </div>
+        </div>
+
+        <!-- РЕДСТОУН -->
+        <div class="card" data-search="повторитель задержка редстоун">
+            <div>
+                <div class="card-header"><h3 class="card-title">Повторитель</h3><span class="card-badge">Редстоун</span></div>
+                <p class="card-desc">3 камня в ряд, сверху 2 редстоун-факела и посередине красный камень.</p>
+            </div>
+        </div>
+
+        <div class="card" data-search="липкий поршень слизь редстоун">
+            <div>
+                <div class="card-header"><h3 class="card-title">Липкий поршень</h3><span class="card-badge">Редстоун</span></div>
+                <p class="card-desc">Обычный поршень + Слизь (slimeball) сверху.</p>
+            </div>
+        </div>
+
+        <div class="card" data-search="компаратор редстоун кварц факел">
+            <div>
+                <div class="card-header"><h3 class="card-title">Редстоун-компаратор</h3><span class="card-badge">Редстоун</span></div>
+                <p class="card-desc">3 адских кварца вверху, 3 редстоун-факела по бокам, 3 камня снизу.</p>
+            </div>
+        </div>
+
+        <div class="card" data-search="наблюдатель датчик блок редстоун">
+            <div>
+                <div class="card-header"><h3 class="card-title">Наблюдатель (Observer)</h3><span class="card-badge">Редстоун</span></div>
+                <p class="card-desc">6 булыжников, 2 красной пыли и 1 нижний кварц.</p>
+            </div>
+        </div>
+
+        <!-- ЗЕЛЬЕБАРЕНИЕ -->
+        <div class="card" data-search="зелье варка колба зельеварение адский нарост">
+            <div>
+                <div class="card-header"><h3 class="card-title">Грубое зелье (База)</h3><span class="card-badge">Зельеварение</span></div>
+                <p class="card-desc">Бутылочка с водой + Адский нарост. Основа для большинства зелий.</p>
+            </div>
+        </div>
+
+        <div class="card" data-search="зелье скорости сахар зельеварение">
+            <div>
+                <div class="card-header"><h3 class="card-title">Зелье скорости</h3><span class="card-badge">Зельеварение</span></div>
+                <p class="card-desc">Грубое зелье + Сахар. Ускоряет бег и прыжки персонажа.</p>
+            </div>
+        </div>
+
+        <div class="card" data-search="зелье ночного видения золотая морковь">
+            <div>
+                <div class="card-header"><h3 class="card-title">Зелье ночного видения</h3><span class="card-badge">Зельеварение</span></div>
+                <p class="card-desc">Грубое зелье + Золотая морковь. Отлично видно в темных пещерах.</p>
+            </div>
+        </div>
+
+        <!-- КОМАНДЫ -->
+        <div class="card" data-search="команды день время погода /time">
+            <div>
+                <div class="card-header"><h3 class="card-title">Установить день</h3><span class="card-badge">Команды</span></div>
+                <p class="card-desc"><code>/time set day</code> — включает яркое утреннее солнце.</p>
+            </div>
+        </div>
+
+        <div class="card" data-search="команды погода ясно дождь /weather">
+            <div>
+                <div class="card-header"><h3 class="card-title">Убрать дождь</h3><span class="card-badge">Команды</span></div>
+                <p class="card-desc"><code>/weather clear</code> — делает погоду идеально солнечной.</p>
+            </div>
+        </div>
+
+        <div class="card" data-search="команды креатив режим игры /gamemode">
+            <div>
+                <div class="card-header"><h3 class="card-title">Режим Творчество</h3><span class="card-badge">Команды</span></div>
+                <p class="card-desc"><code>/gamemode creative</code> — включает бессмертие и полет.</p>
+            </div>
+        </div>
+
+        <div class="card" data-search="команды выживание режим игры /gamemode">
+            <div>
+                <div class="card-header"><h3 class="card-title">Режим Выживание</h3><span class="card-badge">Команды</span></div>
+                <p class="card-desc"><code>/gamemode survival</code> — возвращает обычное выживание.</p>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    let currentCategory = 'all';
-
     function filterCards() {
         let input = document.getElementById('searchInput').value.toLowerCase();
         let cards = document.getElementsByClassName('card');
@@ -261,12 +327,8 @@
         for (let i = 0; i < cards.length; i++) {
             let card = cards[i];
             let searchData = card.getAttribute('data-search').toLowerCase();
-            let category = card.getAttribute('data-category');
             
-            let matchesSearch = searchData.includes(input);
-            let matchesCategory = (currentCategory === 'all' || category === currentCategory);
-
-            if (matchesSearch && matchesCategory) {
+            if (searchData.includes(input)) {
                 card.style.display = "flex";
             } else {
                 card.style.display = "none";
@@ -274,18 +336,18 @@
         }
     }
 
-^    function filterCategory(category, button) {
-        currentCategory = category;
-        
-        // Убираем класс active у всех кнопок
-        let buttons = document.getElementsByClassName('cat-btn');
-        for (let btn of buttons) {
-            btn.classList.remove('active');
+    function searchWeb() {
+        let query = document.getElementById('webSearchInput').value.trim();
+        if (query) {
+            let url = `https://www.google.com/search?q=minecraft+${encodeURIComponent(query)}`;
+            window.open(url, '_blank');
         }
-        // Добавляем текущей
-        button.classList.add('active');
+    }
 
-        filterCards();
+    function handleWebSearchKey(event) {
+        if (event.key === 'Enter') {
+            searchWeb();
+        }
     }
 </script>
 
