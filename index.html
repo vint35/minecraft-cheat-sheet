@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Майнкрафт: Шпаргалка</title>
+    <title>РњР°Р№РЅРєСЂР°С„С‚: РЁРїР°СЂРіР°Р»РєР°</title>
     <style>
         :root {
             --bg-color: #121214;
@@ -146,106 +146,106 @@
 
 <div class="container">
     <header>
-        <h1>?? Шпаргалка по Майнкрафту</h1>
-        <p class="subtitle">Всё самое важное под рукой!</p>
+        <h1>рџ’Ћ РЁРїР°СЂРіР°Р»РєР° РїРѕ РњР°Р№РЅРєСЂР°С„С‚Сѓ</h1>
+        <p class="subtitle">Р’СЃС‘ СЃР°РјРѕРµ РІР°Р¶РЅРѕРµ РїРѕРґ СЂСѓРєРѕР№!</p>
     </header>
 
-    <input type="text" id="searchInput" class="search-box" placeholder="Поиск предмета, рецепта или команды..." onkeyup="filterCards()">
+    <input type="text" id="searchInput" class="search-box" placeholder="РџРѕРёСЃРє РїСЂРµРґРјРµС‚Р°, СЂРµС†РµРїС‚Р° РёР»Рё РєРѕРјР°РЅРґС‹..." onkeyup="filterCards()">
 
     <div class="categories">
-        <button class="cat-btn active" onclick="filterCategory('all', this)">Все</button>
-        <button class="cat-btn" onclick="filterCategory('craft', this)">Крафт</button>
-        <button class="cat-btn" onclick="filterCategory('redstone', this)">Редстоун</button>
-        <button class="cat-btn" onclick="filterCategory('potions', this)">Зельеварение</button>
-        <button class="cat-btn" onclick="filterCategory('commands', this)">Команды</button>
+        <button class="cat-btn active" onclick="filterCategory('all', this)">Р’СЃРµ</button>
+        <button class="cat-btn" onclick="filterCategory('craft', this)">РљСЂР°С„С‚</button>
+        <button class="cat-btn" onclick="filterCategory('redstone', this)">Р РµРґСЃС‚РѕСѓРЅ</button>
+        <button class="cat-btn" onclick="filterCategory('potions', this)">Р—РµР»СЊРµРІР°СЂРµРЅРёРµ</button>
+        <button class="cat-btn" onclick="filterCategory('commands', this)">РљРѕРјР°РЅРґС‹</button>
     </div>
 
     <div class="grid" id="cardsGrid">
-        <!-- Карточка 1 -->
-        <div class="card" data-category="craft" data-search="верстак доски крафт">
+        <!-- РљР°СЂС‚РѕС‡РєР° 1 -->
+        <div class="card" data-category="craft" data-search="РІРµСЂСЃС‚Р°Рє РґРѕСЃРєРё РєСЂР°С„С‚">
             <div>
                 <div class="card-header">
-                    <h3 class="card-title">Верстак</h3>
-                    <span class="card-badge">Крафт</span>
+                    <h3 class="card-title">Р’РµСЂСЃС‚Р°Рє</h3>
+                    <span class="card-badge">РљСЂР°С„С‚</span>
                 </div>
-                <p class="card-desc">4 блока досок (любой древесины) в квадрате 2х2.</p>
+                <p class="card-desc">4 Р±Р»РѕРєР° РґРѕСЃРѕРє (Р»СЋР±РѕР№ РґСЂРµРІРµСЃРёРЅС‹) РІ РєРІР°РґСЂР°С‚Рµ 2С…2.</p>
             </div>
         </div>
 
-        <!-- Карточка 2 -->
-        <div class="card" data-category="craft" data-search="сундук доски крафт">
+        <!-- РљР°СЂС‚РѕС‡РєР° 2 -->
+        <div class="card" data-category="craft" data-search="СЃСѓРЅРґСѓРє РґРѕСЃРєРё РєСЂР°С„С‚">
             <div>
                 <div class="card-header">
-                    <h3 class="card-title">Сундук</h3>
-                    <span class="card-badge">Крафт</span>
+                    <h3 class="card-title">РЎСѓРЅРґСѓРє</h3>
+                    <span class="card-badge">РљСЂР°С„С‚</span>
                 </div>
-                <p class="card-desc">8 досок по периметру верстака (оставьте центр пустым).</p>
+                <p class="card-desc">8 РґРѕСЃРѕРє РїРѕ РїРµСЂРёРјРµС‚СЂСѓ РІРµСЂСЃС‚Р°РєР° (РѕСЃС‚Р°РІСЊС‚Рµ С†РµРЅС‚СЂ РїСѓСЃС‚С‹Рј).</p>
             </div>
         </div>
 
-        <!-- Карточка 3 -->
-        <div class="card" data-category="redstone" data-search="повторитель задержка редстоун">
+        <!-- РљР°СЂС‚РѕС‡РєР° 3 -->
+        <div class="card" data-category="redstone" data-search="РїРѕРІС‚РѕСЂРёС‚РµР»СЊ Р·Р°РґРµСЂР¶РєР° СЂРµРґСЃС‚РѕСѓРЅ">
             <div>
                 <div class="card-header">
-                    <h3 class="card-title">Повторитель</h3>
-                    <span class="card-badge">Редстоун</span>
+                    <h3 class="card-title">РџРѕРІС‚РѕСЂРёС‚РµР»СЊ</h3>
+                    <span class="card-badge">Р РµРґСЃС‚РѕСѓРЅ</span>
                 </div>
-                <p class="card-desc">3 камня (булыжника) в ряд, сверху 2 редстоун-факела и посередине красный камень.</p>
+                <p class="card-desc">3 РєР°РјРЅСЏ (Р±СѓР»С‹Р¶РЅРёРєР°) РІ СЂСЏРґ, СЃРІРµСЂС…Сѓ 2 СЂРµРґСЃС‚РѕСѓРЅ-С„Р°РєРµР»Р° Рё РїРѕСЃРµСЂРµРґРёРЅРµ РєСЂР°СЃРЅС‹Р№ РєР°РјРµРЅСЊ.</p>
             </div>
         </div>
 
-        <!-- Карточка 4 -->
-        <div class="card" data-category="potions" data-search="зелье варка колба зельеварение">
+        <!-- РљР°СЂС‚РѕС‡РєР° 4 -->
+        <div class="card" data-category="potions" data-search="Р·РµР»СЊРµ РІР°СЂРєР° РєРѕР»Р±Р° Р·РµР»СЊРµРІР°СЂРµРЅРёРµ">
             <div>
                 <div class="card-header">
-                    <h3 class="card-title">Мутная колба (База)</h3>
-                    <span class="card-badge">Зельеварение</span>
+                    <h3 class="card-title">РњСѓС‚РЅР°СЏ РєРѕР»Р±Р° (Р‘Р°Р·Р°)</h3>
+                    <span class="card-badge">Р—РµР»СЊРµРІР°СЂРµРЅРёРµ</span>
                 </div>
-                <p class="card-desc">Бутылочка с водой + Сгусток магмы. Основа для многих зелий.</p>
+                <p class="card-desc">Р‘СѓС‚С‹Р»РѕС‡РєР° СЃ РІРѕРґРѕР№ + РЎРіСѓСЃС‚РѕРє РјР°РіРјС‹. РћСЃРЅРѕРІР° РґР»СЏ РјРЅРѕРіРёС… Р·РµР»РёР№.</p>
             </div>
         </div>
 
-        <!-- Карточка 5 -->
-        <div class="card" data-category="commands" data-search="команды день время погода /time">
+        <!-- РљР°СЂС‚РѕС‡РєР° 5 -->
+        <div class="card" data-category="commands" data-search="РєРѕРјР°РЅРґС‹ РґРµРЅСЊ РІСЂРµРјСЏ РїРѕРіРѕРґР° /time">
             <div>
                 <div class="card-header">
-                    <h3 class="card-title">Установить день</h3>
-                    <span class="card-badge">Команды</span>
+                    <h3 class="card-title">РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РґРµРЅСЊ</h3>
+                    <span class="card-badge">РљРѕРјР°РЅРґС‹</span>
                 </div>
-                <p class="card-desc"><code>/time set day</code> — включает яркое утреннее солнце.</p>
+                <p class="card-desc"><code>/time set day</code> вЂ” РІРєР»СЋС‡Р°РµС‚ СЏСЂРєРѕРµ СѓС‚СЂРµРЅРЅРµРµ СЃРѕР»РЅС†Рµ.</p>
             </div>
         </div>
 
-        <!-- Карточка 6 -->
-        <div class="card" data-category="commands" data-search="команды погода ясно дождь /weather">
+        <!-- РљР°СЂС‚РѕС‡РєР° 6 -->
+        <div class="card" data-category="commands" data-search="РєРѕРјР°РЅРґС‹ РїРѕРіРѕРґР° СЏСЃРЅРѕ РґРѕР¶РґСЊ /weather">
             <div>
                 <div class="card-header">
-                    <h3 class="card-title">Убрать дождь</h3>
-                    <span class="card-badge">Команды</span>
+                    <h3 class="card-title">РЈР±СЂР°С‚СЊ РґРѕР¶РґСЊ</h3>
+                    <span class="card-badge">РљРѕРјР°РЅРґС‹</span>
                 </div>
-                <p class="card-desc"><code>/weather clear</code> — делает погоду идеально солнечной.</p>
+                <p class="card-desc"><code>/weather clear</code> вЂ” РґРµР»Р°РµС‚ РїРѕРіРѕРґСѓ РёРґРµР°Р»СЊРЅРѕ СЃРѕР»РЅРµС‡РЅРѕР№.</p>
             </div>
         </div>
 
-        <!-- Карточка 7 -->
-        <div class="card" data-category="craft" data-search="ворока печка уголь железо руда">
+        <!-- РљР°СЂС‚РѕС‡РєР° 7 -->
+        <div class="card" data-category="craft" data-search="РІРѕСЂРѕРєР° РїРµС‡РєР° СѓРіРѕР»СЊ Р¶РµР»РµР·Рѕ СЂСѓРґР°">
             <div>
                 <div class="card-header">
-                    <h3 class="card-title">Печка</h3>
-                    <span class="card-badge">Крафт</span>
+                    <h3 class="card-title">РџРµС‡РєР°</h3>
+                    <span class="card-badge">РљСЂР°С„С‚</span>
                 </div>
-                <p class="card-desc">8 блоков булыжника по кругу (без центрального блока).</p>
+                <p class="card-desc">8 Р±Р»РѕРєРѕРІ Р±СѓР»С‹Р¶РЅРёРєР° РїРѕ РєСЂСѓРіСѓ (Р±РµР· С†РµРЅС‚СЂР°Р»СЊРЅРѕРіРѕ Р±Р»РѕРєР°).</p>
             </div>
         </div>
 
-        <!-- Карточка 8 -->
-        <div class="card" data-category="redstone" data-search="липкий поршень слизь редстоун">
+        <!-- РљР°СЂС‚РѕС‡РєР° 8 -->
+        <div class="card" data-category="redstone" data-search="Р»РёРїРєРёР№ РїРѕСЂС€РµРЅСЊ СЃР»РёР·СЊ СЂРµРґСЃС‚РѕСѓРЅ">
             <div>
                 <div class="card-header">
-                    <h3 class="card-title">Липкий поршень</h3>
-                    <span class="card-badge">Редстоун</span>
+                    <h3 class="card-title">Р›РёРїРєРёР№ РїРѕСЂС€РµРЅСЊ</h3>
+                    <span class="card-badge">Р РµРґСЃС‚РѕСѓРЅ</span>
                 </div>
-                <p class="card-desc">Обычный поршень + Шлак/Слизь (slimeball) сверху.</p>
+                <p class="card-desc">РћР±С‹С‡РЅС‹Р№ РїРѕСЂС€РµРЅСЊ + РЁР»Р°Рє/РЎР»РёР·СЊ (slimeball) СЃРІРµСЂС…Сѓ.</p>
             </div>
         </div>
     </div>
@@ -277,12 +277,12 @@
 ^    function filterCategory(category, button) {
         currentCategory = category;
         
-        // Убираем класс active у всех кнопок
+        // РЈР±РёСЂР°РµРј РєР»Р°СЃСЃ active Сѓ РІСЃРµС… РєРЅРѕРїРѕРє
         let buttons = document.getElementsByClassName('cat-btn');
         for (let btn of buttons) {
             btn.classList.remove('active');
         }
-        // Добавляем текущей
+        // Р”РѕР±Р°РІР»СЏРµРј С‚РµРєСѓС‰РµР№
         button.classList.add('active');
 
         filterCards();
